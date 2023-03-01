@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    color: theme('colors.secondary.DEFAULT');
+  }
+}
+// input:checked + div {
+//   @apply border-red-500;
+// }
+// input:checked + div svg {
+//   @apply block;
+// }
+
+@import '../components/footer/footer.scss';
+
+@layer components {
+  .overlay {
+    @apply fixed w-screen h-screen top-0 left-0 right-0 bottom-0 bg-black/40 backdrop-blur-sm;
+  }
+  .ripple-container {
+    @apply text-white relative font-medium px-5 py-3 mr-2 mb-2;
+    & .ripple {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      // background-color: #f18c3a;
+      clip-path: circle(0 at center);
+      transition: 0.3s ease-out;
+    }
+    &:hover {
+      .ripple {
+        clip-path: circle(100% at center);
+      }
+    }
+  }
+  .count-badge {
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    & .count {
+      width: 16px;
+      height: 16px;
+      color: #fff;
+      font-size: 9px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      right: -5px;
+      bottom: -5px;
+      background-color: theme('colors.primary.DEFAULT');
+      border-radius: theme('borderRadius.full');
+    }
+  }
+  .rotate-text {
+    position: relative;
+    // background-color: red;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    border-radius: theme('borderRadius.full');
+    & .text {
+      position: absolute;
+      color: #000;
+      font-size: 24px;
+      user-select: none;
+      font-weight: bold;
+      pointer-events: none;
+      font-family: theme('fontFamily.display');
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: aminate 7.5s linear infinite;
+      transition: all 0.2s linear;
+      span {
+        position: absolute;
+        top: -100px;
+        text-transform: uppercase;
+        transform-origin: 0 100px;
+        display: inline-block;
+      }
+    }
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &:hover {
+      .text {
+        color: theme('colors.primary.DEFAULT');
+      }
+    }
+
+    @keyframes aminate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
